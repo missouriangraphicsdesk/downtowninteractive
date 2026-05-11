@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Missourian Infographics</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Domine:400,700"/>
+    <script type="text/javascript" src="http://www.columbiamissourian.com/app/projects/Project_files/js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="http://www.columbiamissourian.com/app/projects/Project_files/js/jquery-ui-1.10.2.custom.js"></script>
+    <script type="text/javascript" src="http://www.columbiamissourian.com/app/projects/Project_files/js/jquery.ui.tooltip.js"></script>
+    <script type="text/javascript" src="http://www.columbiamissourian.com/app/projects/Project_files/js/jquery.cycle.all.js"></script>
+
+    <style>
+        h1 { font-size: 3em; line-height: 1.4em; }
+        p.body, a { color: black; font-size: 16px; line-height: 27px; margin-bottom: 24px; }
+        .domine, h3 { font-family: 'Domine', serif; }
+
+        .graphic { width: 100%; max-width: 630px; height: auto; margin: 0 auto; }
+        .graphicmedium { max-width: 960px; width: 100%; height: auto; margin: 0 auto; }
+        .graphicwide { max-width: 1200px; width: 100%; height: auto; margin: 0 auto; }
+
+        .graphic h4, .graphicwide h4, .graphicmedium h4 {
+            padding: 0; margin: 50px 0 4px 0;
+            font-family: 'Domine', serif; font-weight: bold;
+            font-size: 1.5em; line-height: 1.5em; z-index: 2000;
+        }
+        .graphic p, p {
+            width: 100%; padding: 5px 0; margin: 0 0 8px 0;
+            font-family: 'Domine', serif; font-size: 1em; line-height: 1.5em; z-index: 2000;
+        }
+        .graphic img, .graphicmedium img, .graphicwide img { width: 100%; height: auto; z-index: 1000; }
+        .graphic div { height: auto; z-index: 1000; }
+
+        .dots { position: relative; }
+
+        .dot {
+            background-color: #DF7527;
+            color: white; text-align: center; vertical-align: middle;
+            padding: 0; line-height: 20px; font-family: sans-serif; font-size: 14px;
+            width: 100px !important; height: 20px !important;
+            border-radius: 20px; border: 1px solid #ffffff;
+            box-shadow: 1px 1px 1px #000000; cursor: pointer; z-index: 999;
+        }
+
+        .dots .parent { position: absolute; width: auto; }
+        .parent a { text-decoration: none; }
+
+        .popup {
+            position: absolute; border: solid 1px #666666;
+            background-color: white; box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+            padding: 10px; font-family: 'Open Sans', sans-serif;
+            font-size: 0.9em; line-height: 1.2em; width: 250px;
+            color: black; display: none; z-index: 5000;
+        }
+        .popup-right { left: 112px; top: -22px; }
+        .popup-element { left: 182px; top: -22px;}
+        .popup-left { right: 108px; top: -23px; }
+        .popup-below { left: -116px; top: 35px; }
+        .popup-above { left: -74px; bottom: 33px; }
+
+        .parent .popup::after {
+            content: ""; position: absolute;
+            margin-left: -5px; border-width: 10px; border-style: solid;
+        }
+        .popup-right::after  { top: 22px; left: -15px;  border-color: transparent #666666 transparent transparent; }
+        .popup-element::after  { top: 22px; left: -15px;  border-color: transparent #666666 transparent transparent; }
+        .popup-left::after   { top: 22px; left: 102%;   border-color: transparent transparent transparent #666666; }
+        .popup-below::after  { bottom: 100%; left: 45%; border-color: transparent transparent #666666 transparent; }
+        .popup-above::after  { top: 100%;  left: 45%;   border-color: #666666 transparent transparent transparent; }
+
+        .popup div { width: 80%; margin: auto; }
+        .popup img { max-width: 100%; height: auto; }
+
+        .parent:hover .popup { display: block; }
+        .parent:hover { z-index: 5000; }
+
+        /* SATELLITE DOTS */
+		.satellite-dot {
+   						 position: absolute;
+    					width: 20px !important;        /* match these two */
+    					height: 20px !important;       /* to the same value */
+    					border-radius: 100%;
+    					background-color: #CC0000;
+    					border: 2px solid #780404;
+    					box-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    					pointer-events: none;
+    					z-index: 998;
+    					display: none;
+    					transform: translate(-10px, -10px); /* should be half of width/height */
+}
+        
+
+        @media screen and (max-width: 768px) {
+            .hide-desktop { display: none; }
+            .hide-tablet { display: block; }
+        }
+        @media screen and (max-width: 480px) {
+            .graphic h4 { font-size: 1.5em; }
+            .graphic p { font-size: 0.9em; line-height: 1.4em; }
+            .graphic { width: 100%; max-width: 1200px; }
+        }
+        @media screen and (max-width: 300px) {
+            .graphic h4 { font-size: 1.5em; }
+            .graphic p { font-size: 0.9em; line-height: 1.4em; }
+            .graphic { width: 100%; max-width: 1200px; }
+        }
+    </style>
+</head>
+
+<body>
+<div class="graphic">
+    <h4>A change in downtown Columbia's student housing</h4>
+    <p>Mizzou's growing student population have caused student housing options downtown to increase.  More than 3,100 students live downtown. New apartment developments and renovated buildings have reshaped parts of the downtown landscape to meet the rising demand for housing.  </p>
+
+    <div class="graphicmedium move">
+        <div class="dots" id="map-dots">
+
+            <!-- The Element Properties -->
+            <div class="parent" style="left: 80%; top: 15%;"
+                data-related="15%,70%,9th &amp;">
+
+                <div class="dot" style="background-color: #DF7527; width: 170px !important;">The Element Properties</div>
+                <div class="popup popup-left">
+                    <strong>The Element Properties</strong><br/>
+                    Address: 1101 E Walnut St, Columbia, MO 65201<br/>
+                    Current Ownership: HSRE Mizzou I LLC<br/>
+                    Bed Count: 1063 beds
+                    <div><img src="images/ElementBraxton.gif" width="150" height="200" alt=""/></div>
+                </div>
+            </div>
+
+            <!-- The Lofts on Broadway -->
+            <div class="parent" style="left: 46%; top: 25%;">
+                <div class="dot" style="background-color: #DF7527;">The Lofts</div>
+                <div class="popup popup-right">
+                    <strong>The Lofts on Broadway</strong><br/>
+                    <strong>Address:</strong> 1007 E Broadway, Columbia, MO 65201<br/>
+                    <strong>Current Ownership:</strong> BMT OF COLUMBIA LLC<br/>
+                    <strong>Bed Count:</strong> 36
+                    <div><img src="images/LoftsonBroadway.gif" width="150" height="200" alt=""/></div>
+                </div>
+            </div>
+
+            <!-- The Rise on 9th -->
+            <div class="parent" style="left: 38%; top: 55%;">
+                <div class="dot" style="background-color: #DF7527;">The Rise</div>
+                <div class="popup popup-left">
+                    <strong>The Rise on 9th</strong><br/>
+                    <strong>Address:</strong> 915 Locust Street Columbia, MO 65201<br/>
+                    <strong>Current Ownership:</strong> DRI/ARTICLE COLUMBIA LLC<br/>
+                    <strong>Bed Count:</strong> 429
+                    <div><img src="images/TheRiseon9th.gif" width="150" height="200" alt=""/></div>
+                </div>
+            </div>
+
+            <!-- Brookside — with 3 satellite locations -->
+            <div class="parent"
+                 style="left: 34%; top: 69%;"
+                 data-related="53.5%,70%,9th &amp; Elm; 54%,35%,10th &amp; Broadway">
+                <div class="dot" style="background-color: #DF7527;">Brookside</div>
+                <div class="popup popup-left">
+                    <strong>Brookside Properties</strong><br/>
+                    <strong>Address:</strong> 219 S 9th St Columbia, MO 65201<br/>
+                    <strong>Current Ownership:</strong> GPL BROOKSIDE PROPCO LLC<br/>
+                    <strong>Bed Count:</strong> 834
+                    <div><img src="images/Brookside-9th.gif" width="150" height="200" alt=""/></div>
+                </div>
+            </div>
+
+            <!-- District Flats -->
+            <div class="parent" style="left: 21%; top: 52.1%;">
+                <div class="dot" style="background-color: #DF7527;">District Flats</div>
+                <div class="popup popup-left">
+                    <strong>District Flats (Formerly Yugo)</strong><br/>
+                    <strong>Address:</strong> 127 S 8th St, Columbia, MO 65201<br/>
+                    <strong>Current Ownership:</strong> DISTRICT FLATS COLUMBIA OWNER LLC<br/>
+                    <strong>Bed Count:</strong> 259
+                    <div><img src="images/District-flats.gif" width="150" height="200" alt=""/></div>
+                </div>
+            </div>
+
+            <!-- Lofts at 308 Ninth -->
+            <div class="parent" style="left: 37%; top: 79%;">
+                <div class="dot" style="background-color: #DF7527;">Lofts at 308</div>
+                <div class="popup popup-above">
+                    <strong>Lofts at 308 Ninth</strong><br/>
+                    Address: 308 S 9th St, Columbia, MO 65201<br/>
+                    Owned by: MM II LLC<br/>
+                    Bed Count: 120 beds
+                    <div><img src="images/Loftsat308.gif" width="150" height="200" alt=""/></div>
+                </div>
+            </div>
+
+            <div>
+                <img src="images/DowntownMapBase.png" alt="A map showing downtown Columbia and featuring its different apartment complexes.">
+            </div>
+
+        </div><!-- end .dots -->
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+    var $container = $('#map-dots');
+
+    $('.parent').on('mouseenter', function () {
+        var related = $(this).data('related');
+        $('.satellite-dot').remove();
+
+        if (!related) return;
+
+        var entries = String(related).split(';');
+
+        $.each(entries, function (i, entry) {
+            entry = $.trim(entry);
+            if (!entry) return;
+
+            var parts = entry.split(',');
+            var left  = $.trim(parts[0]);
+            var top   = $.trim(parts[1]);
+            var label = parts[2] ? $.trim(parts[2]) : '';
+
+            var $dot = $('<div class="satellite-dot"></div>')
+                .css({ left: left, top: top, display: 'block' })
+                .attr('title', label);
+
+            $container.append($dot);
+        });
+    });
+
+    $container.on('mouseleave', function () {
+        $('.satellite-dot').remove();
+    });
+
+});
+</script>
+
+</body>
+</html>
